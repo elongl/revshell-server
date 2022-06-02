@@ -1,12 +1,13 @@
 import socket
 import threading
+from dataclasses import dataclass
 
 
+@dataclass
 class Agent:
-    _RECV_BUFSIZE = 4096
+    sock: socket.socket
 
-    def __init__(self, sock: socket.socket) -> None:
-        self._sock = sock
+    _RECV_BUFSIZE = 4096
 
     def run_shell_cmd(self, cmd: str, binary=False):
         self._sock.send(f'{cmd}\n'.encode())
